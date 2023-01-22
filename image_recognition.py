@@ -35,5 +35,4 @@ import necessary libraries
 use camera or pre-recorded video to capture images of the game
 in main loop, use image processing techniques such as thresholding, edge detection, etc. to find the paddle and ball
 use the coordinates of the paddle and ball to move the paddle and ball
-
 '''
