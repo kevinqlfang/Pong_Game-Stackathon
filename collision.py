@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 from score import Score
 
 # Define some colors
@@ -9,7 +9,10 @@ PURPLE = (206, 202, 255)
 class Collision:
     def check_paddle_collision(self, ball, paddle):
         if pygame.Rect.colliderect(ball.rect, paddle.rect):
-            ball.speed_x *= -1
+            if (ball.x >= paddle.x and ball.x <= paddle.x + paddle.width) and (ball.y >= paddle.y and ball.y <= paddle.y + paddle.height):
+                # ball is within the boundaries of the paddle
+                # bounce the ball
+                ball.speed_x *= -1
             
             # Check if ball is sticking to paddle
             if abs(ball.x - (paddle.x + paddle.width/2)) < ball.radius:
@@ -19,10 +22,6 @@ class Collision:
                 ball.y = paddle.y + paddle.height/2
 
     def check_wall_collision(self, ball, score, win_score):
-        # if ball.y - ball.radius <= 0 or ball.y + ball.radius >= 720:
-        #     ball.speed_y *= -1
-        # if ball.x - ball.radius <= 0 or ball.x + ball.radius >= 1280:
-        #     ball.reset()
         if ball.y - ball.radius <= 0 or ball.y + ball.radius >= 720:
             ball.speed_y *= -1
         if ball.x - ball.radius <= 0:

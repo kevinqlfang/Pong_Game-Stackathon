@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 
 # Define some colors
 WHITE = (255, 255, 255)

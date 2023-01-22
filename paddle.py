@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 
 # Define some colors
 WHITE = (255, 255, 255)
@@ -23,6 +23,13 @@ class Paddle:
             if self.y + self.height + self.speed <= self.screen_height: # check if paddle is going out of bounds
                 self.y += self.speed
         self.rect.y = self.y
+        
+    def ai_move(self, ball):
+        if ball.y < self.y + self.height/2:
+                self.move("up")
+        elif ball.y > self.y + self.height/2:
+                self.move('down')
+
 
     def draw(self, screen):
         pygame.draw.rect(screen, WHITE, self.rect)

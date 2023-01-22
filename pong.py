@@ -13,7 +13,6 @@ HEIGHT = 720
 
 # initialize pygame
 pygame.init()
-# pygame.font.init()
 
 # set up the screen
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -37,12 +36,14 @@ clock = pygame.time.Clock()
 
 # variables
 done = False
-win_score = 1
+win_score = 3
 win_message = None
 wim_message_rect = None
 
 # main loop
 while True:
+    font = pygame.font.Font(None, 30)
+    
     for event in pygame.event.get(): # user did something
         if event.type == pygame.QUIT: # if close button is pressed
             done = True # flag that we are done so we exit this loop
@@ -65,6 +66,7 @@ while True:
         screen.fill(PURPLE)
 
         # draw objects
+        left_paddle.ai_move(ball) # AI move
         left_paddle.draw(screen)
         right_paddle.draw(screen)
         ball.draw(screen)
@@ -76,7 +78,7 @@ while True:
         ball.move()
         collision.check_wall_collision(ball, score, win_score)
 
-        # # check for collision with left or right wall
+        # check for collision with left or right wall
         if ball.x - ball.radius <= 0:
             score.add_point("right")
             if score.right_score >= win_score:
@@ -104,11 +106,12 @@ while True:
                 ball.reset()
 
         # update the screen
-        # pygame.display.flip()
-        pygame.display.update()
+        pygame.display.flip()
+        # pygame.display.update()
 
         # limit to 60 frames per second
         clock.tick(60)
         
 # quit
+font.quit()
 pygame.quit()
